@@ -75,13 +75,21 @@
         }
 
         #box {
-            position: absolute;
+            position: fixed;
             top: 0;
-            bottom: 0;
             left: 0;
-            right: 0;
-            margin: auto;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            box-sizing: border-box;
             z-index: 10;
+        }
+
+        #mycard {
+            width: 100%;
         }
 
         #mycard {
@@ -206,7 +214,7 @@
     <!-- Background Shader Target Container -->
     <div id="container"></div>
     
-    <div id="box" class="d-flex align-items-center col-11 col-sm-8 col-md-6">
+    <div id="box">
         <div class="card" id="mycard">
             <div class="card-grid">
                 <div class="photo-wrap">
