@@ -6,6 +6,51 @@
     <meta name="google-site-verification" content="rXbmUPpPgMbG-sho-D92SnsWpYkxi59GRXt5lqE3yHQ" />
     <link rel="icon" type="image/x-icon" href="img/favicon.png">
 
+    <meta name="description" content="Thomas Wollmann — researcher, engineer, and leader in machine learning. Personal homepage with links to Socials.">
+    <meta name="author" content="Thomas Wollmann">
+    <link rel="canonical" href="https://www.thomas-wollmann.de">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="profile">
+    <meta property="og:title" content="Thomas Wollmann">
+    <meta property="og:description" content="Thomas Wollmann — researcher, engineer, and leader in machine learning. Personal homepage with links to Socials.">
+    <meta property="og:url" content="https://www.thomas-wollmann.de">
+    <meta property="og:image" content="https://scholar.googleusercontent.com/citations?view_op=medium_photo&user=H8tlV-oAAAAJ&citpid=4">
+    <meta property="profile:first_name" content="Thomas">
+    <meta property="profile:last_name" content="Wollmann">
+
+    <!-- Schema.org structured data for Google Knowledge Graph -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "@id": "https://www.thomas-wollmann.de/#person",
+        "name": "Thomas Wollmann",
+        "givenName": "Thomas",
+        "familyName": "Wollmann",
+        "url": "https://www.thomas-wollmann.de",
+        "image": "https://scholar.googleusercontent.com/citations?view_op=medium_photo&user=H8tlV-oAAAAJ&citpid=4",
+        "sameAs": [
+            "https://www.linkedin.com/in/thomas-wollmann-876054185/",
+            "https://www.xing.com/profile/Thomas_Wollmann16",
+            "https://scholar.google.de/citations?user=H8tlV-oAAAAJ",
+            "https://researchgate.net/profile/Thomas_Wollmann",
+            "https://github.com/thomaswollmann",
+            "https://www.thomas-wollmann.de/"
+        ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "@id": "https://www.thomas-wollmann.de/#website",
+        "url": "https://www.thomas-wollmann.de/",
+        "name": "Thomas Wollmann",
+        "about": { "@id": "https://www.thomas-wollmann.de/#person" }
+    }
+    </script>
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
@@ -39,6 +84,7 @@
         }
 
         #mycard {
+            position: relative;
             background-color: rgba(255, 255, 255, 0.92);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
@@ -47,26 +93,109 @@
             border-radius: 16px;
             border: 1px solid rgba(255, 255, 255, 0.2);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            padding: 20px;
+            padding: 24px 28px;
+        }
+
+        /* Desktop layout: photo centered exactly on the left border */
+        .card-grid {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .photo-wrap {
+            flex: 0 0 auto;
+            /* padding-left (28) + margin-left (-93) = -65 → photo center sits on the border */
+            margin-left: -93px;
         }
 
         #myimg {
+            display: block;
             border-radius: 50%;
-            top: -75px;
-            right: -75px;
-            height: 150px;
-            position: absolute;
+            height: 130px;
+            width: 130px;
+            object-fit: cover;
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
             border: 4px solid #ffffff;
         }
 
+        .info {
+            flex: 1 1 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 14px;
+            min-width: 0;
+        }
+
+        #myname {
+            color: #1e1e2f;
+            font-weight: 700;
+            margin: 0;
+            text-align: center;
+            white-space: nowrap;
+            font-size: clamp(1.1rem, 2.6vw, 1.75rem);
+        }
+
+        .socials {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .socials a {
+            display: inline-flex;
+            line-height: 0;
+        }
+
         .social-icon {
+            height: 30px;
+            width: auto;
+            border: 0;
             transition: transform 0.2s ease, opacity 0.2s ease;
         }
 
         .social-icon:hover {
             transform: scale(1.15);
             opacity: 0.85;
+        }
+
+        /* Mobile: stack vertically — photo on top, name middle, socials bottom */
+        @media (max-width: 575.98px) {
+            #mycard {
+                padding: 75px 20px 22px;
+                margin-top: 60px;
+            }
+
+            .card-grid {
+                flex-direction: column;
+                gap: 16px;
+            }
+
+            /* Float the photo half above the card */
+            .photo-wrap {
+                position: absolute;
+                top: -60px;
+                left: 50%;
+                transform: translateX(-50%);
+                margin-left: 0;
+            }
+
+            #myimg {
+                height: 110px;
+                width: 110px;
+                border-width: 3px;
+            }
+
+            #myname {
+                font-size: clamp(1.15rem, 5.5vw, 1.6rem);
+            }
+
+            .socials {
+                gap: 22px;
+            }
         }
     </style>
     <title>Thomas Wollmann</title>
@@ -77,40 +206,28 @@
     <div id="container"></div>
     
     <div id="box" class="d-flex align-items-center col-11 col-sm-8 col-md-6">
-        <div class="container card" id="mycard">
-            <div class="row align-items-center">
-                <div class="col" style="padding-left: 25px;">
-                    <div class="row">
-                        <a href="https://www.linkedin.com/in/thomas-wollmann-876054185/" target="blanc">
-                            <img class="social-icon" src="img/linkedin-logo.png" height="30"
-                                style="margin-top:5px;margin-bottom:5px;border:0;" alt="LinkedIn logo" />
-                        </a>
-                    </div>
-                    <div class="row">
-                        <a href="https://www.xing.com/profile/Thomas_Wollmann16" target="blanc">
-                            <img class="social-icon" src="img/xing-logo.png" height="30" 
-                                style="margin-top:5px;margin-bottom:5px;border:0;" alt="Xing logo" />
-                        </a>
-                    </div>
-                    <div class="row">
-                        <a href="https://scholar.google.de/citations?user=H8tlV-oAAAAJ" target="blanc">
-                            <img class="social-icon" src="img/googlescholar-logo.png" height="30"
-                                style="margin-top:5px;margin-bottom:5px;border:0;" alt="Google Scholar logo" />
-                        </a>
-                    </div>
-                    <div class="row">        
-                        <a href="https://researchgate.net/profile/Thomas_Wollmann" target="blanc">
-                            <img class="social-icon" src="img/researchgate-logo.jpg" height="30"
-                                style="margin-top:5px;margin-bottom:5px;border:0;" alt="ResearchGate logo" />
-                        </a>
-                    </div>
-                </div>
-                <div class="col d-none d-md-block">
-                    <h3 class="text-center" style="color: #1e1e2f; font-weight: 700;">Thomas Wollmann</h3>
-                </div>
-                <div class="col">
+        <div class="card" id="mycard">
+            <div class="card-grid">
+                <div class="photo-wrap">
                     <img id="myimg"
                         src="https://scholar.googleusercontent.com/citations?view_op=medium_photo&user=H8tlV-oAAAAJ&citpid=4" alt="Thomas Wollmann">
+                </div>
+                <div class="info">
+                    <h3 id="myname">Thomas Wollmann</h3>
+                    <div class="socials">
+                        <a href="https://www.linkedin.com/in/thomas-wollmann-876054185/" target="_blank" rel="noopener" aria-label="LinkedIn">
+                            <img class="social-icon" src="img/linkedin-logo.png" alt="LinkedIn logo" />
+                        </a>
+                        <a href="https://www.xing.com/profile/Thomas_Wollmann16" target="_blank" rel="noopener" aria-label="Xing">
+                            <img class="social-icon" src="img/xing-logo.png" alt="Xing logo" />
+                        </a>
+                        <a href="https://scholar.google.de/citations?user=H8tlV-oAAAAJ" target="_blank" rel="noopener" aria-label="Google Scholar">
+                            <img class="social-icon" src="img/googlescholar-logo.png" alt="Google Scholar logo" />
+                        </a>
+                        <a href="https://researchgate.net/profile/Thomas_Wollmann" target="_blank" rel="noopener" aria-label="ResearchGate">
+                            <img class="social-icon" src="img/researchgate-logo.jpg" alt="ResearchGate logo" />
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -245,6 +362,49 @@
                 targetMouse.y = -(e.touches[0].clientY / window.innerHeight) * 2.0 + 1.0;
             }
         }, { passive: true });
+
+        // Device orientation (gyro) input for mobile devices
+        let gyroEnabled = false;
+
+        function handleOrientation(event) {
+            // gamma: left-right tilt in degrees [-90, 90]
+            // beta: front-back tilt in degrees [-180, 180]
+            if (event.gamma === null || event.beta === null) return;
+            const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
+            // Map a comfortable tilt range (~±30°) to [-1, 1]
+            targetMouse.x = clamp(event.gamma / 30, -1, 1);
+            targetMouse.y = clamp(-(event.beta - 45) / 30, -1, 1);
+            gyroEnabled = true;
+        }
+
+        function enableGyro() {
+            // iOS 13+ requires explicit user-gesture permission
+            if (typeof DeviceOrientationEvent !== 'undefined' &&
+                typeof DeviceOrientationEvent.requestPermission === 'function') {
+                DeviceOrientationEvent.requestPermission().then(state => {
+                    if (state === 'granted') {
+                        window.addEventListener('deviceorientation', handleOrientation);
+                    }
+                }).catch(() => {});
+            } else if (typeof DeviceOrientationEvent !== 'undefined') {
+                window.addEventListener('deviceorientation', handleOrientation);
+            }
+        }
+
+        // Attempt to attach immediately (works on Android / non-iOS browsers)
+        if (typeof DeviceOrientationEvent !== 'undefined' &&
+            typeof DeviceOrientationEvent.requestPermission !== 'function') {
+            window.addEventListener('deviceorientation', handleOrientation);
+        }
+
+        // On iOS, request permission on first user interaction
+        const requestGyroOnce = () => {
+            enableGyro();
+            window.removeEventListener('touchend', requestGyroOnce);
+            window.removeEventListener('click', requestGyroOnce);
+        };
+        window.addEventListener('touchend', requestGyroOnce, { once: true });
+        window.addEventListener('click', requestGyroOnce, { once: true });
 
         function init() {
             const container = document.getElementById('container');
