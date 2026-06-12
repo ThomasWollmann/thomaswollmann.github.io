@@ -1,8 +1,9 @@
 <!doctype html>
-<html>
+<html lang="en">
 <head>
     <meta charset="utf-8">
-	<meta name="google-site-verification" content="rXbmUPpPgMbG-sho-D92SnsWpYkxi59GRXt5lqE3yHQ" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-site-verification" content="rXbmUPpPgMbG-sho-D92SnsWpYkxi59GRXt5lqE3yHQ" />
     <link rel="icon" type="image/x-icon" href="img/favicon.png">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
@@ -13,7 +14,18 @@
     <style>
         body {
             margin: 0;
+            overflow: hidden;
+            background-color: #05050a;
             font-family: 'Open Sans', sans-serif;
+        }
+
+        #container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
         }
 
         #box {
@@ -23,12 +35,19 @@
             left: 0;
             right: 0;
             margin: auto;
+            z-index: 10;
         }
 
         #mycard {
-            background-color: #ffffff;
+            background-color: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             max-width: 500px;
             min-width: 150px;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            padding: 20px;
         }
 
         #myimg {
@@ -37,48 +56,61 @@
             right: -75px;
             height: 150px;
             position: absolute;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            border: 4px solid #ffffff;
+        }
+
+        .social-icon {
+            transition: transform 0.2s ease, opacity 0.2s ease;
+        }
+
+        .social-icon:hover {
+            transform: scale(1.15);
+            opacity: 0.85;
         }
     </style>
     <title>Thomas Wollmann</title>
 </head>
 
 <body>
+    <!-- Background Shader Target Container -->
     <div id="container"></div>
-    <div id="box" class="d-flex align-items-center col-6">
+    
+    <div id="box" class="d-flex align-items-center col-11 col-sm-8 col-md-6">
         <div class="container card" id="mycard">
             <div class="row align-items-center">
                 <div class="col" style="padding-left: 25px;">
                     <div class="row">
                         <a href="https://www.linkedin.com/in/thomas-wollmann-876054185/" target="blanc">
-                            <img src="img/linkedin-logo.png" height="30"
-                                style="margin-top:5px;margin-bottom:5px;border:0;" alt="linkedin logo" />
+                            <img class="social-icon" src="img/linkedin-logo.png" height="30"
+                                style="margin-top:5px;margin-bottom:5px;border:0;" alt="LinkedIn logo" />
                         </a>
                     </div>
                     <div class="row">
                         <a href="https://www.xing.com/profile/Thomas_Wollmann8" target="blanc">
-                            <img src="img/xing-logo.png" height="30" style="margin-top:5px;margin-bottom:5px;border:0;"
-                                alt="xing logo" />
+                            <img class="social-icon" src="img/xing-logo.png" height="30" 
+                                style="margin-top:5px;margin-bottom:5px;border:0;" alt="Xing logo" />
                         </a>
                     </div>
                     <div class="row">
                         <a href="https://scholar.google.de/citations?user=H8tlV-oAAAAJ" target="blanc">
-                            <img src="img/googlescholar-logo.png" height="30"
-                                style="margin-top:5px;margin-bottom:5px;border:0;" alt="google logo" />
+                            <img class="social-icon" src="img/googlescholar-logo.png" height="30"
+                                style="margin-top:5px;margin-bottom:5px;border:0;" alt="Google Scholar logo" />
                         </a>
                     </div>
-                    <div class="row"">                        
-                        <a href=" https://researchgate.net/profile/Thomas_Wollmann" target="blanc">
-                        <img src="img/researchgate-logo.jpg" height="30"
-                            style="margin-top:5px;margin-bottom:5px;border:0;" alt="researchgate logo" />
+                    <div class="row">        
+                        <a href="https://researchgate.net/profile/Thomas_Wollmann" target="blanc">
+                            <img class="social-icon" src="img/researchgate-logo.jpg" height="30"
+                                style="margin-top:5px;margin-bottom:5px;border:0;" alt="ResearchGate logo" />
                         </a>
                     </div>
                 </div>
                 <div class="col d-none d-md-block">
-                    <h3 class="text-center">Thomas Wollmann</h3>
+                    <h3 class="text-center" style="color: #1e1e2f; font-weight: 700;">Thomas Wollmann</h3>
                 </div>
                 <div class="col">
                     <img id="myimg"
-                        src="https://scholar.googleusercontent.com/citations?view_op=medium_photo&user=H8tlV-oAAAAJ&citpid=4">
+                        src="https://scholar.googleusercontent.com/citations?view_op=medium_photo&user=H8tlV-oAAAAJ&citpid=4" alt="Thomas Wollmann">
                 </div>
             </div>
         </div>
@@ -88,12 +120,13 @@
     <script type="importmap">
         {
             "imports": {
-            "three": "https://unpkg.com/three@v0.149.0/build/three.module.js",
-            "three/addons/": "https://unpkg.com/three@v0.149.0/examples/jsm/"
+                "three": "https://unpkg.com/three@v0.149.0/build/three.module.js",
+                "three/addons/": "https://unpkg.com/three@v0.149.0/examples/jsm/"
             }
         }
     </script>
 
+    <!-- Shared Standard Vertex Shader -->
     <script id="vertexShader" type="x-shader/x-vertex">
         varying vec2 vUv;
 
@@ -104,88 +137,167 @@
     </script>
 
     <script id="fragmentShader" type="x-shader/x-fragment">
+        precision highp float;
         varying vec2 vUv;
-        uniform float time;
+        uniform vec2 u_resolution;
+        uniform float u_time;
+        uniform vec2 u_mouse;
 
-        void main()	{
+        mat2 rot2d(float a) {
+            float s = sin(a), c = cos(a);
+            return mat2(c, -s, s, c);
+        }
 
-            vec2 p = - 1.0 + 2.0 * vUv;
-            float a = time * 40.0;
-            float d, e, f, g = 1.0 / 40.0 ,h ,i ,r ,q;
+        // Palette generator for volumetric coloring
+        vec3 palette(float t) {
+            vec3 a = vec3(0.5, 0.4, 0.6);
+            vec3 b = vec3(0.5, 0.5, 0.4);
+            vec3 c = vec3(1.0, 1.0, 1.0);
+            vec3 d = vec3(0.0, 0.15, 0.25);
+            return a + b * cos(6.28318 * (c * t + d));
+        }
 
-            e = 400.0 * ( p.x * 0.5 + 0.5 );
-            f = 400.0 * ( p.y * 0.5 + 0.5 );
-            i = 200.0 + sin( e * g + a / 150.0 ) * 20.0;
-            d = 200.0 + cos( f * g / 2.0 ) * 18.0 + cos( e * g ) * 7.0;
-            r = sqrt( pow( abs( i - e ), 2.0 ) + pow( abs( d - f ), 2.0 ) );
-            q = f / r;
-            e = ( r * cos( q ) ) - a / 2.0;
-            f = ( r * sin( q ) ) - a / 2.0;
-            d = sin( e * g ) * 176.0 + sin( e * g ) * 164.0 + r;
-            h = ( ( f + d ) + a / 2.0 ) * g;
-            i = cos( h + r * p.x / 1.3 ) * ( e + e + a ) + cos( q * g * 6.0 ) * ( r + h / 3.0 );
-            h = sin( f * g ) * 144.0 - sin( e * g ) * 212.0 * p.x;
-            h = ( h + ( f - e ) * q + sin( r - ( a + h ) / 7.0 ) * 10.0 + i / 4.0 ) * g;
-            i += cos( h * 2.3 * sin( a / 350.0 - q ) ) * 184.0 * sin( q - ( r * 4.3 + a / 12.0 ) * g ) + tan( r * g + h ) * 184.0 * cos( r * g + h );
-            i = mod( i / 5.6, 256.0 ) / 64.0;
-            if ( i < 0.0 ) i += 4.0;
-            if ( i >= 2.0 ) i = 4.0 - i;
-            d = r / 350.0;
-            d += sin( d * d * 8.0 ) * 0.52;
-            f = ( sin( a * g ) + 1.0 ) / 2.0;
-            gl_FragColor = vec4( vec3( f * i / 1.6, i / 1.0 + d / 13.0, i ) * d * p.x + vec3( i / 1.3 + d / 8.0, i / 1.0 + d / 18.0, i ) * d * ( 1.0 - p.x ), 1.0 );
+        // Distance Map Generator using a 3D Gyroid Lattice
+        float map(vec3 p) {
+            vec3 q = p * 1.2;
+            
+            // Subtle space-folding twist matching standard dynamic rates
+            q.xy *= rot2d(u_time * 0.08);
+            q.xz *= rot2d(u_time * 0.05);
+            
+            float gyroid = abs(dot(sin(q), cos(q.zxy))) / 1.2 - 0.03;
+            
+            // Open infinite cylinder along the camera ray path using dynamic cursor target offset
+            float path = length(p.xy - u_mouse * 0.6) - 1.1;
+            
+            return max(gyroid, -path);
+        }
+
+        void main() {
+            // Correct for screen aspect ratios in normalized coordinates
+            vec2 uv = (gl_FragCoord.xy - 0.5 * u_resolution.xy) / u_resolution.y;
+            
+            // Set up camera positions and volumetric coordinate vectors
+            vec3 ro = vec3(0.0, 0.0, u_time * 0.4);
+            vec3 rd = normalize(vec3(uv, 1.0));
+            
+            // Dynamic look rotations based on user's cursor pointer
+            rd.xy *= rot2d(u_mouse.y * 0.25);
+            rd.xz *= rot2d(u_mouse.x * 0.25);
+
+            float t = 0.0;
+            float glow = 0.0;
+            
+            // Ultra-performant 35-step raymarcher loop safe for high frames on mobile GPUs
+            for (int i = 0; i < 35; i++) {
+                vec3 p = ro + rd * t;
+                float d = map(p);
+                
+                // Accumulate volumetric dynamic light map
+                glow += exp(-d * 5.5);
+                
+                if (d < 0.002 || t > 18.0) break;
+                t += d * 0.65;
+            }
+
+            vec3 col = vec3(0.0);
+            vec3 colorBase = palette(t * 0.06 + u_time * 0.03);
+            
+            // Tone calculations with volumetric glow maps
+            col += colorBase * (glow * 0.025);
+            col += vec3(0.08, 0.04, 0.15) / (1.0 + t * t * 0.1);
+            
+            // Ambient fog mapping
+            col *= 1.0 - (t * 0.045);
+            
+            // Post processing contrasts
+            col = clamp(col, 0.0, 1.0);
+            col = pow(col, vec3(1.15));
+            
+            gl_FragColor = vec4(col, 1.0);
         }
     </script>
 
-	<script type="module">
-            import * as THREE from 'three';
+    <script type="module">
+        import * as THREE from 'three';
 
-            let camera, scene, renderer;
-			let uniforms;
+        let camera, scene, renderer;
+        let uniforms;
+        
+        // Track smoothed/damped mouse inputs for elegant transitions
+        let mouse = new THREE.Vector2(0, 0);
+        let targetMouse = new THREE.Vector2(0, 0);
 
-            init()
-			animate();
-            onWindowResize();
-            window.addEventListener( 'resize', onWindowResize );
+        init();
+        animate();
+        onWindowResize();
+        window.addEventListener( 'resize', onWindowResize );
 
-			function init() {
-                camera = new THREE.OrthographicCamera( - 1, 1, 1, - 1, 0, 1 );
+        // Cursor & Touch move events listeners
+        window.addEventListener('mousemove', (e) => {
+            targetMouse.x = (e.clientX / window.innerWidth) * 2.0 - 1.0;
+            targetMouse.y = -(e.clientY / window.innerHeight) * 2.0 + 1.0;
+        });
 
-				scene = new THREE.Scene();
-
-				const geometry = new THREE.PlaneGeometry( 2, 2 );
-
-				uniforms = {
-					time: { value: 1.0 }
-				};
-
-				const material = new THREE.ShaderMaterial( {
-
-					uniforms: uniforms,
-					vertexShader: document.getElementById( 'vertexShader' ).textContent,
-					fragmentShader: document.getElementById( 'fragmentShader' ).textContent
-
-				} );
-
-				const mesh = new THREE.Mesh( geometry, material );
-				scene.add( mesh );
-
-				renderer = new THREE.WebGLRenderer();
-				renderer.setPixelRatio( window.devicePixelRatio );
-				container.appendChild( renderer.domElement );
+        window.addEventListener('touchmove', (e) => {
+            if (e.touches.length > 0) {
+                targetMouse.x = (e.touches[0].clientX / window.innerWidth) * 2.0 - 1.0;
+                targetMouse.y = -(e.touches[0].clientY / window.innerHeight) * 2.0 + 1.0;
             }
+        }, { passive: true });
 
-            function onWindowResize() {
-                renderer.setSize( window.innerWidth, window.innerHeight );
-            }
+        function init() {
+            const container = document.getElementById('container');
+            camera = new THREE.OrthographicCamera( - 1, 1, 1, - 1, 0, 1 );
 
-            function animate() {
-                requestAnimationFrame( animate );
-                uniforms[ 'time' ].value = performance.now() / 1000;
-                renderer.render( scene, camera );
-            }
-	</script>
+            scene = new THREE.Scene();
 
+            const geometry = new THREE.PlaneGeometry( 2, 2 );
+
+            // Setup performance-oriented uniform variables
+            uniforms = {
+                u_time: { value: 1.0 },
+                u_resolution: { value: new THREE.Vector2() },
+                u_mouse: { value: new THREE.Vector2() }
+            };
+
+            const material = new THREE.ShaderMaterial( {
+                uniforms: uniforms,
+                vertexShader: document.getElementById( 'vertexShader' ).textContent,
+                fragmentShader: document.getElementById( 'fragmentShader' ).textContent
+            } );
+
+            const mesh = new THREE.Mesh( geometry, material );
+            scene.add( mesh );
+
+            renderer = new THREE.WebGLRenderer({ antialias: false, powerPreference: "high-performance" });
+            
+            // Cap pixel ratio to max 1.5 for exceptional responsiveness on high-DPI smartphone screens
+            const pixelRatio = Math.min(window.devicePixelRatio, 1.5);
+            renderer.setPixelRatio( pixelRatio );
+            
+            container.appendChild( renderer.domElement );
+        }
+
+        function onWindowResize() {
+            renderer.setSize( window.innerWidth, window.innerHeight );
+            uniforms.u_resolution.value.set( window.innerWidth, window.innerHeight );
+        }
+
+        function animate() {
+            requestAnimationFrame( animate );
+
+            // Smooth linear interpolation for target mouse cursor coordinates
+            mouse.x += (targetMouse.x - mouse.x) * 0.08;
+            mouse.y += (targetMouse.y - mouse.y) * 0.08;
+            uniforms.u_mouse.value.copy(mouse);
+
+            uniforms.u_time.value = performance.now() / 1000;
+            renderer.render( scene, camera );
+        }
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
