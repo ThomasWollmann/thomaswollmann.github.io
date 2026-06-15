@@ -23,18 +23,23 @@
     <!-- Schema.org structured data for Google Knowledge Graph -->
     <script type="application/ld+json">
     {
-        "@context": "https://schema.org",
+      "@context": "https://schema.org",
+      "@graph": [
+        {
         "@type": "Person",
         "@id": "https://www.thomas-wollmann.de/#person",
         "name": "Dr. Thomas Wollmann",
         "givenName": "Thomas",
         "familyName": "Wollmann",
+        "honorificPrefix": "Dr.",
         "jobTitle": "Managing Director & Chief Technology Officer",
         "url": "https://www.thomas-wollmann.de",
         "image": "https://scholar.googleusercontent.com/citations?view_op=medium_photo&user=H8tlV-oAAAAJ&citpid=4",
         "alumniOf": {
             "@type": "EducationalOrganization",
-            "name": "Heidelberg University"
+            "name": "Heidelberg University",
+            "alternateName": "Ruprecht-Karls-Universität Heidelberg",
+            "url": "https://www.uni-heidelberg.de/"
         },
         "sameAs": [
             "https://www.linkedin.com/in/thomas-wollmann-876054185/",
@@ -48,17 +53,29 @@
             "https://github.com/thomaswollmann",
             "https://openreview.net/profile?id=~Thomas_Wollmann2",
             "https://www.thomas-wollmann.de/"
-        ]
-    }
-    </script>
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "WebSite",
-        "@id": "https://www.thomas-wollmann.de/#website",
-        "url": "https://www.thomas-wollmann.de/",
-        "name": "Thomas Wollmann",
-        "about": { "@id": "https://www.thomas-wollmann.de/#person" }
+        ]}, 
+        {
+          "@type": "WebSite",
+          "@id": "http://thomas-wollmann.de/#website",
+          "url": "http://thomas-wollmann.de/",
+          "name": "Thomas Wollmann - Personal Website",
+          "publisher": {
+            "@id": "http://thomas-wollmann.de/#person"
+          }
+        }, 
+        {
+          "@type": "WebPage",
+          "@id": "http://thomas-wollmann.de/#webpage",
+          "url": "http://thomas-wollmann.de/",
+          "name": "About Dr. Thomas Wollmann",
+          "isPartOf": {
+            "@id": "http://thomas-wollmann.de/#website"
+          },
+          "mainEntity": {
+            "@id": "http://thomas-wollmann.de/#person"
+          }
+        }
+      ]
     }
     </script>
 
